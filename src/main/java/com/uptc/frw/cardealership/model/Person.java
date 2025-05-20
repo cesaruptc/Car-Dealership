@@ -1,5 +1,6 @@
 package com.uptc.frw.cardealership.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class Person {
     @Column(name = "PHONE")
     private long phone;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "person")
     private List<Assignment> assignments;
 

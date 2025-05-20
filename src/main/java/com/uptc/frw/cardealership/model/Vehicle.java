@@ -1,5 +1,6 @@
 package com.uptc.frw.cardealership.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class Vehicle {
     @OneToMany(mappedBy = "vehicle")
     private List<VehicleOption> vehicleOptions;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "vehicle")
     private List<Assignment> assignments;
 
@@ -48,48 +50,63 @@ public class Vehicle {
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
+
     public String getBrand() {
         return brand;
     }
+
     public void setBrand(String brand) {
         this.brand = brand;
     }
+
     public String getModel() {
         return model;
     }
+
     public void setModel(String model) {
         this.model = model;
     }
+
     public String getEngineCapacity() {
         return engineCapacity;
     }
+
     public void setEngineCapacity(String engineCapacity) {
         this.engineCapacity = engineCapacity;
     }
+
     public long getPrice() {
         return price;
     }
+
     public void setPrice(long price) {
         this.price = price;
     }
+
     public String getType() {
         return type;
     }
+
     public void setType(String type) {
         this.type = type;
     }
+
     public List<VehicleOption> getVehicleOptions() {
         return vehicleOptions;
     }
+
     public void setVehicleOptions(List<VehicleOption> vehicleOptions) {
         this.vehicleOptions = vehicleOptions;
     }
+
     public List<Assignment> getAssignments() {
         return assignments;
     }
+
     public void setAssignments(List<Assignment> assignments) {
         this.assignments = assignments;
     }

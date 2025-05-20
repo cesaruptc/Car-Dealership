@@ -1,15 +1,19 @@
 package com.uptc.frw.cardealership.POA;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uptc.frw.cardealership.model.AuditLog;
 import com.uptc.frw.cardealership.model.Auditoria;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
+import java.util.Map;
 
 @Aspect
 @Component
@@ -17,43 +21,35 @@ public class AuditoriaAspect {
 
     @Autowired
     private AuditoriaRepository auditoriaRepository;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
     private String userName = System.getProperty("user.name");
 
-    @After("execution(* com.uptc.frw.*.repository.*.save(..))")
-    public void auditarInsert(JoinPoint joinPoint) {
-        Object[] args = joinPoint.getArgs();
-        if (args != null && args.length > 0) {
-            Object entity = args[0];
+    @AfterReturning(value = "execution(* com.uptc.frw.*.repository.*.save(..))", returning = "result")
+    public void auditarInsert(JoinPoint joinPoint, Object result) {
+        if (result == null) return;
 
-            Document newData = new Document();
-            Object idRegister = null;
+        Map<String, Object> newData = convertToMap(result);
+        Object idRegister = newData.getOrDefault("id", null);
 
-            for (Field field : entity.getClass().getDeclaredFields()) {
-                field.setAccessible(true);
-                try {
-                    Object value = field.get(entity);
-                    newData.append(field.getName(), value);
-                    if (field.getName().equalsIgnoreCase("id")) {
-                        idRegister = value;
-                    }
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+        Document documentData = new Document(newData);
 
-            AuditLog auditLog = new AuditLog(
-                    entity.getClass().getSimpleName(),
-                    idRegister,
-                    "INSERT",
-                    userName,
-                    null,
-                    newData
-            );
+        AuditLog auditLog = new AuditLog(
+                result.getClass().getSimpleName(),
+                idRegister,
+                "INSERT",
+                userName,
+                null,
+                documentData
+        );
 
-            auditoriaRepository.save(auditLog);
-//            AuditLog auditoria = new AuditLog(entity.getClass().getSimpleName(),entity[1]);
-        }
+        auditoriaRepository.save(auditLog);
     }
+
+    private Map<String, Object> convertToMap(Object obj) {
+        return objectMapper.convertValue(obj, new TypeReference<Map<String, Object>>() {});
+    }
+
 
 
 }

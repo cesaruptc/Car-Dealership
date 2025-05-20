@@ -18,6 +18,10 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
+    public Vehicle getVehicleById(long vehicleId) {
+        return vehicleRepository.findById(vehicleId).orElse(null);
+    }
+
     public Vehicle saveVehicle(Vehicle vehicle) {
         return vehicleRepository.save(vehicle);
     }

@@ -18,6 +18,10 @@ public class PersonService {
         return personRepository.findAll();
     }
 
+    public Person getPersonById(long personId) {
+        return personRepository.findById(personId).orElse(null);
+    }
+
     public Person savePerson(Person person) {
         return personRepository.save(person);
     }
