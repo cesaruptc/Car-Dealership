@@ -52,7 +52,8 @@ public class AssignmentService {
         if (getAssignmentById(assignmentId) == null) {
             throw new RuntimeException("No se encontró una compra con ID: " + assignmentId);
         } else {
-            assignmentRepository.deleteById(assignmentId);
+            Assignment assignment = assignmentRepository.findById(assignmentId).orElse(null);
+            assignmentRepository.delete(assignment);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.uptc.frw.cardealership.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.*;
@@ -44,7 +45,7 @@ public class Sale {
     @ManyToOne()
     @JoinColumn(name = "NEW_VEHICLE_ID",nullable = false)
     private Vehicle vehicle;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "sales")
     private List<SalesOption> salesOptions;
 

@@ -3,7 +3,6 @@ package com.uptc.frw.cardealership.POA;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uptc.frw.cardealership.model.AuditLog;
-import com.uptc.frw.cardealership.model.Auditoria;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -12,7 +11,6 @@ import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Field;
 import java.util.Map;
 
 @Aspect
@@ -46,10 +44,29 @@ public class AuditoriaAspect {
         auditoriaRepository.save(auditLog);
     }
 
+    @After("execution(* com.uptc.frw.*.repository.*.delete(..))")
+    public void auditarDelete(JoinPoint joinPoint) {
+        Object entity = joinPoint.getArgs()[0];
+        if (entity == null) return;
+        
+        Map<String, Object> oldData = convertToMap(entity);
+        Object idRegister = oldData.getOrDefault("id", null);
+        
+        Document documentData = new Document(oldData);
+
+        AuditLog auditLog = new AuditLog(
+                entity.getClass().getSimpleName(),
+                idRegister,
+                "DELETE",
+                userName,
+                documentData,
+                null
+        );
+
+        auditoriaRepository.save(auditLog);
+    }
+    
     private Map<String, Object> convertToMap(Object obj) {
         return objectMapper.convertValue(obj, new TypeReference<Map<String, Object>>() {});
     }
-
-
-
 }

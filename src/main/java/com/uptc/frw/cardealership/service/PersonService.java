@@ -25,4 +25,10 @@ public class PersonService {
     public Person savePerson(Person person) {
         return personRepository.save(person);
     }
+
+    public void deletePerson(long personId){
+        Person person = personRepository.findById(personId).orElse(null);
+        personRepository.delete(person);
+    }
+
 }

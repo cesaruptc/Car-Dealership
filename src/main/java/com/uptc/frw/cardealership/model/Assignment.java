@@ -33,7 +33,7 @@ public class Assignment {
     @ManyToOne()
     @JoinColumn(name = "PERSON_ID",nullable = false)
     private Person person;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "assignment")
     private List<Sale> sales;
 

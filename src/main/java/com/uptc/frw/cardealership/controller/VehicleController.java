@@ -25,4 +25,9 @@ public class VehicleController {
     public Vehicle saveVehicle(@RequestBody Vehicle vehicle) {
         return vehicleService.saveVehicle(vehicle);
     }
+
+    @DeleteMapping
+    public void deleteVehicle(@RequestParam long vehicleId){
+        vehicleService.deleteVehicle(vehicleId);
+    }
 }

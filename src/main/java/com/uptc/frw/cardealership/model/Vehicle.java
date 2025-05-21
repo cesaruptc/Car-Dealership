@@ -27,14 +27,14 @@ public class Vehicle {
 
     @Column(name = "TYPE")
     private String type;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "vehicle")
     private List<VehicleOption> vehicleOptions;
 
     @JsonIgnore
     @OneToMany(mappedBy = "vehicle")
     private List<Assignment> assignments;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "vehicle")
     private List<Sale> sales;
 

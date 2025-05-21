@@ -29,8 +29,11 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private List<Assignment> assignments;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Sale> sales;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "seller")
     private List<Sale> salesSeller;
 

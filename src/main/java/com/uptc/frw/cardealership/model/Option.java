@@ -1,6 +1,7 @@
 package com.uptc.frw.cardealership.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class Option {
     private String name;
     @Column(name = "DESCRIPTION")
     private String description;
+    @JsonIgnore
     @OneToMany(mappedBy = "option")
     private List<VehicleOption> vehicleOptions;
 

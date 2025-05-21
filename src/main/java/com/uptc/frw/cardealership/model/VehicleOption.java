@@ -1,4 +1,5 @@
 package com.uptc.frw.cardealership.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class VehicleOption {
     @ManyToOne
     @JoinColumn(name = "VEHICLE_ID",nullable = false)
     private Vehicle vehicle;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "vehicleOption" )
     private List<SalesOption> salesOptions;
 
