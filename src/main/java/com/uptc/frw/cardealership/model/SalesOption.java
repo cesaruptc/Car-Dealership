@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class SalesOption {
 
     @Id
-    @Column(name = "SALES_OPTION_ID")
+    @Column(name = "SALE_OPTION_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "SALE_ID",insertable = false,updatable = false)

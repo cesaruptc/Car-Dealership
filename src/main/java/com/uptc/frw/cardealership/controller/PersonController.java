@@ -23,6 +23,7 @@ public class PersonController {
     public Person savePerson(@RequestBody Person person) {
         return personService.savePerson(person);
     }
+
     @DeleteMapping
     public void deletePerson( @RequestParam long personId){
         personService.deletePerson(personId);

@@ -31,6 +31,6 @@ public class AssignmentController {
 
     @DeleteMapping
     public void deleteAssignment(@RequestParam long assignmentId) {
-        assignmentService.deleteAssignment(assignmentId);
+        //
     }
 }

@@ -28,7 +28,12 @@ public class PersonService {
 
     public void deletePerson(long personId){
         Person person = personRepository.findById(personId).orElse(null);
-        personRepository.delete(person);
+
+        if (person == null) {
+            throw new RuntimeException("No se encontró persona con ID: " + personId);
+        } else {
+            personRepository.delete(person);
+        }
     }
 
 }

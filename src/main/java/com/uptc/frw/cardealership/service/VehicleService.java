@@ -28,6 +28,11 @@ public class VehicleService {
 
     public void deleteVehicle(long vehicleId){
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
-        vehicleRepository.delete(vehicle);
+
+        if (vehicle == null) {
+            throw new RuntimeException("No se encontró vehiculo con ID: " + vehicleId);
+        } else {
+            vehicleRepository.delete(vehicle);
+        }
     }
 }
