@@ -33,4 +33,8 @@ public class AssignmentController {
     public void deleteAssignment(@RequestParam long assignmentId) {
         //
     }
+    @PutMapping
+    public Assignment updateAssignment(@RequestBody Assignment newAssignment){
+        return assignmentService.updateAssignment(newAssignment);
+    }
 }

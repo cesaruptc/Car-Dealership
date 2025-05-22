@@ -34,4 +34,8 @@ public class SaleController {
     public void deleteAssignment(@RequestParam long assignmentId) {
         //
     }
+    @PutMapping
+    public Sale updateSale(@RequestBody Sale newSale){
+        return saleService.updateSale(newSale);
+    }
 }

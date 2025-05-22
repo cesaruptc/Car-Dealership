@@ -28,4 +28,9 @@ public class OptionController {
     public void deleteOption( @RequestParam long optionId){
         optionService.deleteOption(optionId);
     }
+    @PutMapping
+    public Option updateOption(@RequestBody Option newOption){
+        return optionService.updateOption(newOption);
+    }
 }
+

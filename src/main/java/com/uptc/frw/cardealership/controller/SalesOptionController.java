@@ -34,4 +34,8 @@ public class SalesOptionController {
     public void deleteAssignment(@RequestParam long assignmentId) {
         //
     }
+    @PutMapping
+    public SalesOption updateSalesOption(@RequestBody SalesOption newSalesOption){
+        return salesOptionService.updateSalesOption(newSalesOption);
+    }
 }

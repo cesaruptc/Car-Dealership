@@ -27,7 +27,19 @@ public class OptionService {
     }
 
     public void deleteOption(long optionId){
-        //
+        Option option = optionRepository.findById(optionId).orElse(null);
+        if(option ==null){
+            throw new RuntimeException("No se encontró opcion con ID: " + optionId);
+        }
+        else{
+            optionRepository.delete(option);
+        }
+    }
+    public Option updateOption(Option newOption){
+        Option option = getOptionById(newOption.getId());
+        option.setName(newOption.getName());
+        option.setDescription(newOption.getDescription());
+        return optionRepository.save(option);
     }
 
 }

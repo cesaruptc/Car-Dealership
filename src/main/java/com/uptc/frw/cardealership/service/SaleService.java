@@ -72,5 +72,29 @@ public class SaleService {
             saleRepository.delete(sale);
         }
     }
+    public Sale updateSale(Sale newSale){
+        Sale sale = getSaleById(newSale.getId());
+        sale.setNewLicense(newSale.getNewLicense());
+        sale.setSaleDate(newSale.getSaleDate());
+        sale.setPrice(newSale.getPrice());
+        Person seller = personService.getPersonById(newSale.getSellerId());
+        if (seller == null) {
+            throw new RuntimeException("Persona no encontrada con ID: " + newSale.getSellerId());
+        }
+        sale.setSeller(seller);
+
+        Vehicle vehicle = vehicleService.getVehicleById(newSale.getVehicleId());
+        if (vehicle == null) {
+            throw new RuntimeException("Vehículo no encontrado con ID: " + newSale.getVehicleId());
+        }
+        sale.setVehicle(vehicle);
+
+        Assignment assignment = assignmentService.getAssignmentById(newSale.getAssignmentId());
+        if (assignment == null) {
+            throw new RuntimeException("Asignación no encontrada con ID: " + newSale.getAssignmentId());
+        }
+        sale.setAssignment(assignment);
+        return saleRepository.save(sale);
+    }
 
 }

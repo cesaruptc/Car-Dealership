@@ -53,5 +53,24 @@ public class SalesOptionService {
             salesOptionsRepository.delete(salesOption);
         }
     }
+    public SalesOption updateSalesOption(SalesOption newSalesOption){
+        SalesOption salesOption = getSalesOptionById(newSalesOption.getId());
+        Sale sale = saleService.getSaleById(newSalesOption.getSaleId());
+        if (sale == null) {
+            throw new RuntimeException("Venta no encontrada con ID: " + newSalesOption.getSaleId());
+        }
+        salesOption.setSales(sale);
+        VehicleOption vehicleOption = vehicleOptionService.getVehicleOptionById(newSalesOption.getVehicleOptionId());
+        if (vehicleOption == null) {
+            throw new RuntimeException("Opcion_Vehiculo no encontrado con ID: " + newSalesOption.getVehicleOptionId());
+        }
+        salesOption.setVehicleOptionId(newSalesOption.getVehicleOptionId());
+        return salesOptionsRepository.save(salesOption);
+    }
+
+
+
+
+
 
 }

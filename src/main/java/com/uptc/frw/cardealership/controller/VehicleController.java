@@ -30,4 +30,9 @@ public class VehicleController {
     public void deleteVehicle(@RequestParam long vehicleId){
         vehicleService.deleteVehicle(vehicleId);
     }
+    @PutMapping
+    public Vehicle updateVehicle(@RequestBody Vehicle newVehicle){
+        return vehicleService.updateVehicle(newVehicle);
+    }
+
 }

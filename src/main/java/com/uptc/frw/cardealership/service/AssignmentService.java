@@ -56,5 +56,22 @@ public class AssignmentService {
             assignmentRepository.delete(assignment);
         }
     }
+    public Assignment updateAssignment(Assignment newAssignment){
+        Assignment assignment = getAssignmentById(newAssignment.getId());
+        assignment.setDate(newAssignment.getDate());
+        assignment.setPriceAppraisal(newAssignment.getPriceAppraisal());
+        Person person = personService.getPersonById(newAssignment.getPersonId());
+        if (person == null) {
+            throw new RuntimeException("Persona no encontrada con ID: " + newAssignment.getPersonId());
+        }
+        assignment.setPerson(person);
+        Vehicle vehicle = vehicleService.getVehicleById(newAssignment.getVehicleId());
+        if (vehicle == null) {
+            throw new RuntimeException("Vehiculo no encontrada con ID: " + newAssignment.getVehicleId());
+        }
+        assignment.setVehicle(vehicle);
+        return assignmentRepository.save(assignment);
+
+    }
 
 }

@@ -35,5 +35,13 @@ public class PersonService {
             personRepository.delete(person);
         }
     }
+    public Person updatePerson(Person newPerson){
+        Person person = getPersonById(newPerson.getId());
+        person.setName(newPerson.getName());
+        person.setIdentification(newPerson.getIdentification());
+        person.setAddress(newPerson.getAddress());
+        person.setPhone(newPerson.getPhone());
+        return personRepository.save(person);
+    }
 
 }

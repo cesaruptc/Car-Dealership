@@ -35,4 +35,14 @@ public class VehicleService {
             vehicleRepository.delete(vehicle);
         }
     }
+
+    public Vehicle updateVehicle(Vehicle newVehicle){
+        Vehicle vehicle = getVehicleById(newVehicle.getId());
+        vehicle.setBrand(newVehicle.getBrand());
+        vehicle.setModel(newVehicle.getModel());
+        vehicle.setEngineCapacity(newVehicle.getEngineCapacity());
+        vehicle.setPrice(newVehicle.getPrice());
+        vehicle.setType(newVehicle.getType());
+        return vehicleRepository.save(vehicle);
+    }
 }

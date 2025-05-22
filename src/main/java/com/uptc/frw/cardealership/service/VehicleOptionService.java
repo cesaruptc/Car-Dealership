@@ -52,5 +52,19 @@ public class VehicleOptionService {
             vehicleOptionRepository.delete(vehicleOption);
         }
     }
+    public VehicleOption updateVehicleOption(VehicleOption newVehicleOption){
+        VehicleOption vehicleOption = getVehicleOptionById(newVehicleOption.getId());
+        Option option = optionService.getOptionById(newVehicleOption.getOptionId());
+        if (option == null) {
+            throw new RuntimeException("No se encontró "+ newVehicleOption.getOptionId());
+        }
+        vehicleOption.setOption(option);
+        Vehicle vehicle = vehicleService.getVehicleById(newVehicleOption.getVehicleId());
+        if (vehicle == null) {
+            throw new RuntimeException(newVehicleOption.getVehicleId() + " no encontrado");
+        }
+        vehicleOption.setVehicle(vehicle);
+        return vehicleOptionRepository.save(vehicleOption);
+    }
 
 }
