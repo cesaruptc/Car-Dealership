@@ -2,12 +2,13 @@ package com.uptc.frw.cardealership.service;
 
 import com.uptc.frw.cardealership.model.*;
 import com.uptc.frw.cardealership.repository.VehicleOptionRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-
+@RequiredArgsConstructor
 @Service
 public class VehicleOptionService {
 

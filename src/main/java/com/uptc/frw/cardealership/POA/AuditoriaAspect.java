@@ -10,11 +10,12 @@ import org.aspectj.lang.annotation.Aspect;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.aspectj.lang.annotation.Before;
 
 import java.util.Map;
 
-@Aspect
 @Component
+@Aspect
 public class AuditoriaAspect {
 
     @Autowired
@@ -23,7 +24,7 @@ public class AuditoriaAspect {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private String userName = System.getProperty("user.name");
 
-    @AfterReturning(value = "execution(* com.uptc.frw.*.repository.*.save(..))", returning = "result")
+    @AfterReturning(value = "execution(* com.uptc.frw.*.service.*.save(..))", returning = "result")
     public void auditarInsert(JoinPoint joinPoint, Object result) {
         if (result == null) return;
 
@@ -65,7 +66,25 @@ public class AuditoriaAspect {
 
         auditoriaRepository.save(auditLog);
     }
-    
+    @AfterReturning(value = "execution(* com.uptc.frw.*.service.*.update*(..))", returning = "result")
+    public void auditarUpdate(JoinPoint joinPoint, Object result) {
+        if (result == null) return;
+        Map<String, Object> newData = convertToMap(result);
+        Object idRegister = newData.getOrDefault("id", null);
+        Map<String, Object> oldData = convertToMap(joinPoint.getArgs()[0]);
+        Document documentData = new Document(newData);
+        AuditLog auditLog = new AuditLog(
+                result.getClass().getSimpleName(),
+                idRegister,
+                "UPDATE",
+                userName,
+                new Document(oldData),
+                documentData
+        );
+        auditoriaRepository.save(auditLog);
+    }
+
+
     private Map<String, Object> convertToMap(Object obj) {
         return objectMapper.convertValue(obj, new TypeReference<Map<String, Object>>() {});
     }

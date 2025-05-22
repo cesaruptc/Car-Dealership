@@ -5,12 +5,13 @@ import com.uptc.frw.cardealership.model.Person;
 import com.uptc.frw.cardealership.model.Sale;
 import com.uptc.frw.cardealership.model.Vehicle;
 import com.uptc.frw.cardealership.repository.SaleRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-
+@RequiredArgsConstructor
 @Service
 public class SaleService {
 
