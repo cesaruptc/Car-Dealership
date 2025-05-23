@@ -24,6 +24,11 @@ public class AssignmentController {
         return assignmentService.getAssignmentById(assignmentId);
     }
 
+    @GetMapping("/person/{personId}")
+    public List<Assignment> getAssignmentsByPersonId(@PathVariable long personId) {
+        return assignmentService.getAssignmentsByPersonId(personId);
+    }
+
     @PostMapping
     public Assignment saveAssignment(@RequestBody Assignment assignment) {
         return assignmentService.saveAssignment(assignment);

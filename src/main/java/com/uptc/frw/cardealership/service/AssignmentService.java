@@ -31,6 +31,10 @@ public class AssignmentService {
         return assignmentRepository.findById(assignmentId).orElse(null);
     }
 
+    public List<Assignment> getAssignmentsByPersonId(long personId) {
+        return assignmentRepository.findByPersonId(personId);
+    }
+
     public Assignment saveAssignment(Assignment assignment) {
         assignment.setDate(new Date());
         assignment.setPriceAppraisal(assignment.getPriceAppraisal());

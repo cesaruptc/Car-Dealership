@@ -33,6 +33,10 @@ public class SaleService {
         return saleRepository.findById(saleId).orElse(null);
     }
 
+    public List<Sale> getSalesBySellerId(long sellerId) {
+        return saleRepository.findBySellerId(sellerId);
+    }
+
     public Sale saveSale(Sale sale) {
         sale.setNewLicense(sale.getNewLicense());
         sale.setSaleDate(new Date());

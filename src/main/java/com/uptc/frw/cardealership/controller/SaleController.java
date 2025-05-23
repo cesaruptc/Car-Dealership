@@ -25,6 +25,11 @@ public class SaleController {
         return saleService.getSaleById(saleId);
     }
 
+    @GetMapping("seller/{sellerId}")
+    public List<Sale> getSalesBySellerId(@PathVariable long sellerId) {
+        return saleService.getSalesBySellerId(sellerId);
+    }
+
     @PostMapping
     public Sale saveSale(@RequestBody Sale sale) {
         return saleService.saveSale(sale);
