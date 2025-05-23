@@ -47,6 +47,7 @@ public class Vehicle {
         this.price = price;
         this.type = type;
     }
+
     public long getId() {
         return id;
     }

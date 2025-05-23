@@ -32,8 +32,9 @@ public class VehicleOptionController {
 
     @DeleteMapping
     public void deleteVehicleOption(@RequestParam long vehicleOptionId) {
-        //
+        vehicleOptionService.deleteVehicleOption(vehicleOptionId);
     }
+
     @PutMapping
     public VehicleOption updateVehicleOption(@RequestBody VehicleOption newVehicleOption){
         return vehicleOptionService.updateVehicleOption(newVehicleOption);

@@ -58,10 +58,12 @@ public class AssignmentService {
             assignmentRepository.delete(assignment);
         }
     }
+
     public Assignment updateAssignment(Assignment newAssignment){
         Assignment assignment = getAssignmentById(newAssignment.getId());
         assignment.setDate(newAssignment.getDate());
         assignment.setPriceAppraisal(newAssignment.getPriceAppraisal());
+
         Person person = personService.getPersonById(newAssignment.getPersonId());
         if (person == null) {
             throw new RuntimeException("Persona no encontrada con ID: " + newAssignment.getPersonId());
@@ -73,7 +75,5 @@ public class AssignmentService {
         }
         assignment.setVehicle(vehicle);
         return assignmentRepository.save(assignment);
-
     }
-
 }

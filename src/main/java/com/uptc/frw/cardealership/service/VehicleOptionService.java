@@ -53,6 +53,7 @@ public class VehicleOptionService {
             vehicleOptionRepository.delete(vehicleOption);
         }
     }
+
     public VehicleOption updateVehicleOption(VehicleOption newVehicleOption){
         VehicleOption vehicleOption = getVehicleOptionById(newVehicleOption.getId());
         Option option = optionService.getOptionById(newVehicleOption.getOptionId());
@@ -67,5 +68,4 @@ public class VehicleOptionService {
         vehicleOption.setVehicle(vehicle);
         return vehicleOptionRepository.save(vehicleOption);
     }
-
 }

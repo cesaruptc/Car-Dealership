@@ -21,6 +21,11 @@ public class VehicleController {
         return vehicleService.getAllVehicles();
     }
 
+    @GetMapping("/vehicle/{vehicleId}")
+    public Vehicle getVehicleById(@PathVariable long vehicleId) {
+        return vehicleService.getVehicleById(vehicleId);
+    }
+
     @PostMapping
     public Vehicle saveVehicle(@RequestBody Vehicle vehicle) {
         return vehicleService.saveVehicle(vehicle);
@@ -30,6 +35,7 @@ public class VehicleController {
     public void deleteVehicle(@RequestParam long vehicleId){
         vehicleService.deleteVehicle(vehicleId);
     }
+
     @PutMapping
     public Vehicle updateVehicle(@RequestBody Vehicle newVehicle){
         return vehicleService.updateVehicle(newVehicle);

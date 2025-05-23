@@ -73,6 +73,7 @@ public class SaleService {
             saleRepository.delete(sale);
         }
     }
+
     public Sale updateSale(Sale newSale){
         Sale sale = getSaleById(newSale.getId());
         sale.setNewLicense(newSale.getNewLicense());
@@ -97,5 +98,4 @@ public class SaleService {
         sale.setAssignment(assignment);
         return saleRepository.save(sale);
     }
-
 }

@@ -1,19 +1,18 @@
 package com.uptc.frw.cardealership.service;
 
 import com.uptc.frw.cardealership.model.*;
-import com.uptc.frw.cardealership.repository.SalesOptionsRepository;
+import com.uptc.frw.cardealership.repository.SalesOptionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class SalesOptionService {
 
     @Autowired
-    private SalesOptionsRepository salesOptionsRepository;
+    private SalesOptionRepository salesOptionsRepository;
 
     @Autowired
     private SaleService saleService;
@@ -53,6 +52,7 @@ public class SalesOptionService {
             salesOptionsRepository.delete(salesOption);
         }
     }
+
     public SalesOption updateSalesOption(SalesOption newSalesOption){
         SalesOption salesOption = getSalesOptionById(newSalesOption.getId());
         Sale sale = saleService.getSaleById(newSalesOption.getSaleId());
@@ -67,10 +67,4 @@ public class SalesOptionService {
         salesOption.setVehicleOptionId(newSalesOption.getVehicleOptionId());
         return salesOptionsRepository.save(salesOption);
     }
-
-
-
-
-
-
 }

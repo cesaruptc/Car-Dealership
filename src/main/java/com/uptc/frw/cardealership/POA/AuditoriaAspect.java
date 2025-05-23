@@ -30,8 +30,8 @@ public class AuditoriaAspect {
     private final ThreadLocal<Object> idRegisterThreadLocal = new ThreadLocal<>();
     private final ThreadLocal<String> tableNameThreadLocal = new ThreadLocal<>();
 
-    @AfterReturning(value = "execution(* com.uptc.frw.*.service.*.save(..))", returning = "result")
-    public void auditarInsert(JoinPoint joinPoint, Object result) {
+    @AfterReturning(value = "execution(* com.uptc.frw..service..*.save*(..))", returning = "result")
+    public void auditarInsert(Object result) {
         if (result == null) return;
 
         Map<String, Object> newData = convertToMap(result);
@@ -72,24 +72,6 @@ public class AuditoriaAspect {
 
         auditoriaRepository.save(auditLog);
     }
-
-    /*@AfterReturning(value = "execution(* com.uptc.frw.*.service.*.update*(..))", returning = "result")
-    public void auditarUpdate(JoinPoint joinPoint, Object result) {
-        if (result == null) return;
-        Map<String, Object> newData = convertToMap(result);
-        Object idRegister = newData.getOrDefault("id", null);
-        Map<String, Object> oldData = convertToMap(joinPoint.getArgs()[0]);
-        Document documentData = new Document(newData);
-        AuditLog auditLog = new AuditLog(
-                result.getClass().getSimpleName(),
-                idRegister,
-                "UPDATE",
-                userName,
-                new Document(oldData),
-                documentData
-        );
-        auditoriaRepository.save(auditLog);
-    }*/
 
     @Before("execution(* com.uptc.frw.*.service.*.update*(..))")
     public void capOldData(JoinPoint joinPoint) {

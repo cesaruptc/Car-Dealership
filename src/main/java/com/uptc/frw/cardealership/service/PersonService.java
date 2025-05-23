@@ -35,6 +35,7 @@ public class PersonService {
             personRepository.delete(person);
         }
     }
+
     public Person updatePerson(Person newPerson){
         Person person = getPersonById(newPerson.getId());
         person.setName(newPerson.getName());
@@ -43,5 +44,4 @@ public class PersonService {
         person.setPhone(newPerson.getPhone());
         return personRepository.save(person);
     }
-
 }

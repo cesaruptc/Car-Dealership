@@ -38,24 +38,31 @@ public class VehicleOption {
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
+
     public long getVehicleId() {
         return vehicleId;
     }
+
     public void setVehicleId(long vehicleId) {
         this.vehicleId = vehicleId;
     }
+
     public long getOptionId() {
         return optionId;
     }
+
     public void setOptionId(long optionId) {
         this.optionId = optionId;
     }
+
     public long getPrice() {
         return price;
     }
+
     public void setPrice(long price) {
         this.price = price;
     }
@@ -63,12 +70,15 @@ public class VehicleOption {
     public Option getOption() {
         return option;
     }
+
     public void setOption(Option option) {
         this.option = option;
     }
+
     public Vehicle getVehicle() {
         return vehicle;
     }
+
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }

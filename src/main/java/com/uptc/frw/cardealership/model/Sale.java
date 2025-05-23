@@ -104,9 +104,11 @@ public class Sale {
     public long getAssignmentId() {
         return assignmentId;
     }
+
     public void setAssignmentId(long assignmentId) {
         this.assignmentId = assignmentId;
     }
+
     public long getPrice() {
         return price;
     }

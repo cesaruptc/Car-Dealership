@@ -31,9 +31,10 @@ public class SaleController {
     }
 
     @DeleteMapping
-    public void deleteAssignment(@RequestParam long assignmentId) {
-        //
+    public void deleteSale(@RequestParam long saleId) {
+        saleService.deleteSale(saleId);
     }
+
     @PutMapping
     public Sale updateSale(@RequestBody Sale newSale){
         return saleService.updateSale(newSale);

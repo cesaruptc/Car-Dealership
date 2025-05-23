@@ -19,6 +19,11 @@ public class OptionController {
         return optionService.getAllOptions();
     }
 
+    @GetMapping("/option/{optionId}")
+    public Option getOptionByID (@PathVariable long optionId) {
+        return optionService.getOptionById(optionId);
+    }
+
     @PostMapping
     public Option saveOption(@RequestBody Option option) {
         return optionService.saveOption(option);
@@ -28,6 +33,7 @@ public class OptionController {
     public void deleteOption( @RequestParam long optionId){
         optionService.deleteOption(optionId);
     }
+
     @PutMapping
     public Option updateOption(@RequestBody Option newOption){
         return optionService.updateOption(newOption);

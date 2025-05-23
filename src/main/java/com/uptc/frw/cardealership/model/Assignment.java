@@ -43,6 +43,7 @@ public class Assignment {
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -70,9 +71,11 @@ public class Assignment {
     public void setDate(Date date) {
         this.date = date;
     }
+
     public long getPriceAppraisal() {
         return priceAppraisal;
     }
+
     public void setPriceAppraisal(long priceAppraisal) {
         this.priceAppraisal = priceAppraisal;
     }

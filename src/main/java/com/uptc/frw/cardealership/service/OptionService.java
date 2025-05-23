@@ -35,11 +35,11 @@ public class OptionService {
             optionRepository.delete(option);
         }
     }
+
     public Option updateOption(Option newOption){
         Option option = getOptionById(newOption.getId());
         option.setName(newOption.getName());
         option.setDescription(newOption.getDescription());
         return optionRepository.save(option);
     }
-
 }
