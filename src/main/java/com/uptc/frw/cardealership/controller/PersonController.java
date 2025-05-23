@@ -19,6 +19,11 @@ public class PersonController {
         return personService.getAllPersons();
     }
 
+    @GetMapping("/person/{personId}")
+    public Person getPersonById(@PathVariable long personId) {
+        return personService.getPersonById(personId);
+    }
+
     @PostMapping
     public Person savePerson(@RequestBody Person person) {
         return personService.savePerson(person);
@@ -28,6 +33,7 @@ public class PersonController {
     public void deletePerson( @RequestParam long personId){
         personService.deletePerson(personId);
     }
+
     @PutMapping
     public Person updatePerson(@RequestBody Person newPerson){
         return personService.updatePerson(newPerson);

@@ -21,7 +21,6 @@ public class SalesOptionService {
     @Autowired
     private VehicleOptionService vehicleOptionService;
 
-
     public List<SalesOption> getAllSalesOptions() {
         return salesOptionsRepository.findAll();
     }
